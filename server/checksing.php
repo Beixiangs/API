@@ -17,11 +17,20 @@
 	function check($sing){
 		
 		$aes = new AESMcrypt($bit = 128, $key = 'abcdef1234567890', $iv = '0987654321fedcba', $mode = 'cbc');
+		
+		$sing = str_replace(' ', '+', $sing);
+		
+		$sing_tmp = $aes->decrypt($sing);	//test/1432132131
+		$sing_arr = explode('/',$sing_tmp);
 
-		if($aes->decrypt($sing)!=Token){
+		if($sing_arr[0]!=Token){
 			throw new Exception('加密签名不正确');
 		}
 		
+		//防止api暴露
+		if((time()- $sing_arr[1]) > 5){
+			throw new Exception('sing 失效');
+		}		
 	}	
 
 ?>

@@ -13,7 +13,7 @@
 
 	//请求的api地址
 	$url = 'http://localhost/ruanjian_02/api/server/server.php?sing='.$sing;
-	echo $url;
+	echo $sing.'<br>';
 	$curl = new Curl\Curl();
 	$curl->post($url, array(
 	   	'username'=>'xuanqiyan',

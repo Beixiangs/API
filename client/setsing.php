@@ -7,7 +7,9 @@
 		
 
 		$aes = new AESMcrypt($bit = 128, $key = 'abcdef1234567890', $iv = '0987654321fedcba', $mode = 'cbc');
-		$sing = $aes->encrypt($token);
+
+		$sing = $token.'/'.time();//test/1432132131
+		$sing = $aes->encrypt($sing);
 		
 
 		return $sing;
